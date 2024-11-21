@@ -6,6 +6,7 @@ body{
     background-repeat: no-repeat;
     background-size: 100% 100%;
     color: white;
+    font-family: cursive;
 }
 ul{
     display: flex;
@@ -18,7 +19,18 @@ ul{
     width: 30%;
 }
 button{
-    width: 40%;
-    font-size: 15px;
+    width: 60%;
+    height: 7vh;
+    background-color: transparent;
+    color: white;
+    font-weight: bold;
+    font-size: 18px;
     border-radius: 10px;
+    font-family: monospace;
+}
+#tablaDatos{
+width: 50%;
+height: 50%;
+background-color: white;
+color: black;
 }
