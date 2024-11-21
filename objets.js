@@ -17,8 +17,18 @@ function guardar() {
     document.getElementById("Nombre").value = '';
     document.getElementById("Telefono").value = '';
     document.getElementById("Email").value = '';
-    document.getElementById("opciones").value = ''; // Resetea el select
+    document.getElementById("opciones").value = ''; 
 
     alert("Los datos han sido perfectamente guardados y los campos fueron limpiados ");
+    AgregarFila(Datos)
+}
 
+function AgregarFila(Datos) {
+    const tabla = document.getElementById("tablaDatos").getElementsByTagName('tbody')[0];
+    const fila = tabla.insertRow();
+
+    fila.insertCell().textContent = Datos.Nombre;
+    fila.insertCell().textContent = Datos.Telefono;
+    fila.insertCell().textContent = Datos.Email;
+    fila.insertCell().textContent = Datos.Etiqueta;
 }
