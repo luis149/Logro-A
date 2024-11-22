@@ -9,7 +9,7 @@ function guardar() {
         return;
     }
 
-    const Datos = { Nombre, Telefono, Email, Etiqueta };
+    const Datos = { id: Date.now(), Nombre, Telefono, Email, Etiqueta };
     let contactos = JSON.parse(localStorage.getItem("contactos")) || [];
     contactos.push(Datos);
     localStorage.setItem("contactos", JSON.stringify(contactos));
@@ -17,14 +17,14 @@ function guardar() {
     document.getElementById("Nombre").value = '';
     document.getElementById("Telefono").value = '';
     document.getElementById("Email").value = '';
-    document.getElementById("opciones").value = ''; 
+    document.getElementById("opciones").value = '';
 
-    alert("Los datos han sido perfectamente guardados y los campos fueron limpiados ");
+    alert("Los datos han sido perfectamente guardados y los campos fueron limpiados.");
     AgregarFila(Datos);
 }
 
 function AgregarFila(Datos) {
-    const tabla = document.getElementById("tablaDatos").getElementsByTagName('tbody')[0];
+    const tabla = document.getElementById("tablaDatos").querySelector("tbody");
     const fila = tabla.insertRow();
 
     fila.insertCell().textContent = Datos.Nombre;
@@ -33,43 +33,37 @@ function AgregarFila(Datos) {
     fila.insertCell().textContent = Datos.Etiqueta;
 
     const botonEditar = document.createElement('button');
-    botonEditar.textContent = 'Editar Info';
-    botonEditar.onclick = function() {
-        editar(fila);
+    botonEditar.textContent = 'Editar ';
+    botonEditar.onclick = function () {
+        editar(Datos);
     };
-    const celdaEditar = fila.insertCell();
-    celdaEditar.appendChild(botonEditar);
+    botonEditar.style.borderRadius = "10px";  
+    botonEditar.style.width = "100px";
+    botonEditar.style.cursor = "pointer"
+    fila.insertCell().appendChild(botonEditar);
+
+    const botonEliminar = document.createElement('button');
+    botonEliminar.textContent = 'Eliminar ';
+    botonEliminar.onclick = function () {
+        eliminar(fila, Datos);
+    };
+    botonEliminar.style.borderRadius = "10px";  
+    botonEliminar.style.width = "120px";
+    botonEliminar.style.cursor = "pointer"
+    fila.insertCell().appendChild(botonEliminar);
 }
 
-function editar(fila) {
-
-    const nombre = fila.cells[0].textContent;
-    const telefono = fila.cells[1].textContent;
-    const email = fila.cells[2].textContent;
-    const etiqueta = fila.cells[3].textContent;
-
-    localStorage.setItem("editNombre", nombre);
-    localStorage.setItem("editTelefono", telefono);
-    localStorage.setItem("editEmail", email);
-    localStorage.setItem("editEtiqueta", etiqueta);
+function editar(Datos) {
+    
+    localStorage.setItem("editId", Datos.id);
+    localStorage.setItem("editNombre", Datos.Nombre);
+    localStorage.setItem("editTelefono", Datos.Telefono);
+    localStorage.setItem("editEmail", Datos.Email);
+    localStorage.setItem("editEtiqueta", Datos.Etiqueta);
 
     window.location.href = "editar.html";
 }
 
-window.onload = function () {
-
-    if (document.getElementById("editNombre")) {
-        document.getElementById("editNombre").value = localStorage.getItem("editNombre") || "";
-        document.getElementById("editTelefono").value = localStorage.getItem("editTelefono") || "";
-        document.getElementById("editEmail").value = localStorage.getItem("editEmail") || "";
-        document.getElementById("editEtiqueta").value = localStorage.getItem("editEtiqueta") || "";
-    }
-
-    if (document.getElementById("tablaDatos")) {
-        let contactos = JSON.parse(localStorage.getItem("contactos")) || [];
-        contactos.forEach(contacto => AgregarFila(contacto));
-    }
-};
 
 function guardarCambios() {
     const nuevoNombre = document.getElementById("editNombre").value;
@@ -83,22 +77,44 @@ function guardarCambios() {
     }
 
     let contactos = JSON.parse(localStorage.getItem("contactos")) || [];
-
-    let contactoEditado = contactos.find(contacto => contacto.Nombre === localStorage.getItem("editNombre"));
+    let contactoEditado = contactos.find(contacto => contacto.id === parseInt(localStorage.getItem("editId")));
 
     if (contactoEditado) {
-
         contactoEditado.Nombre = nuevoNombre;
         contactoEditado.Telefono = nuevoTelefono;
         contactoEditado.Email = nuevoEmail;
         contactoEditado.Etiqueta = nuevaEtiqueta;
 
         localStorage.setItem("contactos", JSON.stringify(contactos));
-
         alert("La información se ha actualizado correctamente.");
         window.location.href = "index.html";
     } else {
         alert("No se encontró el contacto para editar.");
     }
-
 }
+
+function eliminar(fila, Datos) {
+    let contactos = JSON.parse(localStorage.getItem("contactos")) || [];
+    contactos = contactos.filter(contacto => contacto.id !== Datos.id);
+    localStorage.setItem("contactos", JSON.stringify(contactos));
+
+    fila.remove();
+
+    alert("El contacto ha sido eliminado.");
+}
+
+window.onload = function () {
+
+    if (document.getElementById("tablaDatos")) {
+        const contactos = JSON.parse(localStorage.getItem("contactos")) || [];
+        contactos.forEach(contacto => AgregarFila(contacto));
+    }
+
+    if (document.getElementById("editNombre")) {
+        document.getElementById("editNombre").value = localStorage.getItem("editNombre") || "";
+        document.getElementById("editTelefono").value = localStorage.getItem("editTelefono") || "";
+        document.getElementById("editEmail").value = localStorage.getItem("editEmail") || "";
+        document.getElementById("editEtiqueta").value = localStorage.getItem("editEtiqueta") || "";
+    }
+};
+
