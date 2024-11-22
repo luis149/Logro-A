@@ -48,7 +48,7 @@ function AgregarFila(Datos) {
         eliminar(fila, Datos);
     };
     botonEliminar.style.borderRadius = "10px";  
-    botonEliminar.style.width = "120px";
+    botonEliminar.style.width = "100px";
     botonEliminar.style.cursor = "pointer"
     fila.insertCell().appendChild(botonEliminar);
 }
@@ -103,6 +103,28 @@ function eliminar(fila, Datos) {
     alert("El contacto ha sido eliminado.");
 }
 
+function filtrarContactos() {
+    const filtro = document.getElementById("barraBusqueda").value.toLowerCase();
+    const tabla = document.getElementById("tablaDatos");
+    const filas = tabla.querySelector("tbody").getElementsByTagName("tr");
+
+    for (let i = 0; i < filas.length; i++) {
+        const celdas = filas[i].getElementsByTagName("td");
+        let coincide = false;
+
+        for (let j = 0; j < celdas.length - 1; j++) { 
+            if (celdas[j].textContent.toLowerCase().includes(filtro)) {
+                coincide = true;
+                break;
+            }
+        }
+
+        filas[i].style.display = coincide ? "" : "none";
+    }
+}
+
+
+
 window.onload = function () {
 
     if (document.getElementById("tablaDatos")) {
@@ -117,4 +139,3 @@ window.onload = function () {
         document.getElementById("editEtiqueta").value = localStorage.getItem("editEtiqueta") || "";
     }
 };
-
