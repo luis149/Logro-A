@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar</title>
+    <link rel="stylesheet" href="style2.css">
+    <center><h1>Editar Informacion.</h1></center>
+</head>
+<body>
+    <ul>
+        <label for="editNombre">Nombres Completos:</label>
+        <input type="text" id="editNombre" name="editNombre" required>
+    
+        <label for="editTelefono">Teléfono:</label>
+        <input type="text" id="editTelefono" name="editTelefono" required>
+    
+        <label for="editEmail">Correo Electrónico:</label>
+        <input type="text" id="editEmail" name="editEmail" required>
+    
+        <div class="Etiqueta">
+            <label for="editEtiqueta">Etiqueta:</label>
+            <select id="editEtiqueta">
+                <option value="">SELECCIONE UNA OPCIÓN DE ETIQUETA</option>
+                <option value="Familia">Familia</option>
+                <option value="Trabajo">Trabajo</option>
+                <option value="Otro">Otro</option>
+            </select>
+        </div>
+    
+        <button type="button" onclick="guardarCambios()">Guardar Cambios</button>
+        <br>
+        <a href="index.html">
+            <button type="button">Volver</button>
+        </a>
+    </ul>
+
+    <center>
+        <table border="1" id="tablaDatos" >
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Telefono</th>
+                    <th>Email</th>
+                    <th>Etiqueta</th>
+                </tr>
+            </thead>
+        <tbody>
+    
+        </tbody>
+    </table>
+       </center>
+</body>
+<script src="objets.js"></script>
+</html>

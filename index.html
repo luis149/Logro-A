@@ -1,47 +1,48 @@
-    <!DOCTYPE html>
-    <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Logro A</title>
-        <center><h1>Informacion de contacto.</h1></center>
-        <link rel="stylesheet" href="style.css">
-    </head>
-    <body>
-        <ul>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Logro A</title>
+    <center><h1>Información de contacto</h1></center>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <ul>
         <label for="Nombre">Nombres Completos:</label>
         <input type="text" id="Nombre" name="Nombre" required>
         <label for="Telefono"> Teléfono:</label>
         <input type="text" id="Telefono" name="Telefono" required>
-        <label for="Email">Correo Electronico:</label>
+        <label for="Email">Correo Electrónico:</label>
         <input type="text" id="Email" name="Email" required>
         <div class="Etiqueta">
             <select id="opciones">
-                <option value="">SELECCIONE UNA OPCION DE ETIQUETA</option>
+                <option value="">SELECCIONE UNA OPCIÓN DE ETIQUETA</option>
                 <option value="Familia">Familia</option>
                 <option value="Trabajo">Trabajo</option>
                 <option value="Otro">Otro</option>
             </select>
         </div>
-            <button type="button" onclick="guardar()">Guardar Información</button>
-        </ul>
-        <center><h2>Datos guardados</h2></center>
-
-        <center>
-    <table border="1" id="tablaDatos">
+        <button type="button" onclick="guardar()">Guardar Información</button>
+        <br>
+        <button type="button" onclick="eliminar()">Eliminar Información</button>
+    </ul>
+    <br>
+    <center>
+        <table border="1" id="tablaDatos">
             <thead>
                 <tr>
                     <th>Nombre</th>
-                    <th>Telefono</th>
+                    <th>Teléfono</th>
                     <th>Email</th>
                     <th>Etiqueta</th>
                 </tr>
             </thead>
-        </center>
-        <tbody>
+            <tbody>
 
-        </tbody>
-    </table>
-    </body>
+            </tbody>
+        </table>
+    </center>
     <script src="objets.js"></script>
-    </html>
+</body>
+</html>
